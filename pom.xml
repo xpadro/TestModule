@@ -8,6 +8,7 @@
 	<modules>
 		<module>test-manager-domain</module>
 		<module>test-manager-inbound-adapter</module>
+		<module>test-manager-outbound-adapter</module>
 	</modules>
 
 	<groupId>xpadro</groupId>
@@ -20,6 +21,8 @@
 	<properties>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.plugin.surefire.version>2.22.0</maven.plugin.surefire.version>
+		<maven.plugin.failsafe.version>2.22.0</maven.plugin.failsafe.version>
 	</properties>
 
 	<dependencyManagement>
@@ -33,5 +36,22 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven.plugin.surefire.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>${maven.plugin.failsafe.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 
 </project>

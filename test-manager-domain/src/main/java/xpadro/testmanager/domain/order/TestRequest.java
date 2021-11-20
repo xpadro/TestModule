@@ -1,15 +1,15 @@
 package xpadro.testmanager.domain.order;
 
-import xpadro.testmanager.domain.operation.Operation;
+import xpadro.testmanager.domain.operation.OperationType;
 import xpadro.testmanager.domain.test.SampleTest;
 
 import java.util.List;
 
 public class TestRequest {
     private final SampleTest test;
-    private final List<Operation> operations;
+    private final List<OperationType> operations;
 
-    public TestRequest(SampleTest test, List<Operation> operations) {
+    public TestRequest(SampleTest test, List<OperationType> operations) {
         this.test = test;
         this.operations = operations;
     }
@@ -18,7 +18,7 @@ public class TestRequest {
         return test;
     }
 
-    public List<Operation> getOperations() {
+    public List<OperationType> getOperationTypes() {
         return operations;
     }
 }

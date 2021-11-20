@@ -4,5 +4,7 @@ import xpadro.testmanager.domain.test.SampleTest;
 
 public interface Operation {
 
+    OperationType getType();
+
     OperationResult operate(SampleTest test);
 }

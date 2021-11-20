@@ -1,20 +1,34 @@
 package xpadro.testmanager.inbound.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import xpadro.testmanager.domain.operation.AnalysisOperation;
-import xpadro.testmanager.domain.operation.CalculationOperation;
-import xpadro.testmanager.domain.operation.Operation;
+import xpadro.testmanager.domain.operation.*;
 import xpadro.testmanager.domain.operation.analysis.Analysis;
 import xpadro.testmanager.domain.operation.analysis.BiochemistryAnalysis;
 import xpadro.testmanager.domain.operation.calculation.BiochemistryCalculation;
 import xpadro.testmanager.domain.operation.calculation.Calculation;
 import xpadro.testmanager.domain.operation.calculation.ImmunologyCalculation;
+import xpadro.testmanager.domain.port.OperationPort;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Configuration
 public class ApplicationConfiguration {
+
+    // Ports
+    @Bean
+    public OperationPort operationPort(@Qualifier("calculationOperation") Operation calculationOperation,
+                                       @Qualifier("analysisOperation") Operation analysisOperation) {
+
+        Map<OperationType, Operation> operations = new HashMap<>();
+        operations.put(analysisOperation.getType(), analysisOperation);
+        operations.put(calculationOperation.getType(), calculationOperation);
+
+        return new OperationService(operations);
+    }
 
     // Operations
     @Bean
@@ -27,8 +41,8 @@ public class ApplicationConfiguration {
         return new AnalysisOperation(analyses);
     }
 
-    // Calculations
 
+    // Calculations
     @Bean
     public Calculation biochemistryCalculation() {
         return new BiochemistryCalculation();
@@ -39,8 +53,8 @@ public class ApplicationConfiguration {
         return new ImmunologyCalculation();
     }
 
-    // Analysis
 
+    // Analysis
     @Bean
     public Analysis biochemistryAnalysis() {
         return new BiochemistryAnalysis();

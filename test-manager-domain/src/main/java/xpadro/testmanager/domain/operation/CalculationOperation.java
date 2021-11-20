@@ -13,11 +13,16 @@ public class CalculationOperation implements Operation {
     }
 
     @Override
+    public OperationType getType() {
+        return OperationType.CALCULATION;
+    }
+
+    @Override
     public OperationResult operate(SampleTest test) {
         return calculations.stream()
                 .filter(calc -> calc.supports(test))
                 .findAny()
                 .map(c -> c.calculate(test))
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(IllegalStateException::new);
     }
 }
