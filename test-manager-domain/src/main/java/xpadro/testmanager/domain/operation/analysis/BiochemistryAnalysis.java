@@ -13,8 +13,6 @@ public class BiochemistryAnalysis implements Analysis {
 
     @Override
     public OperationResult analyse(SampleTest test) {
-        System.out.println("Biochemistry analysis on " + test.getName());
-
         BiochemistryTest bioTest = (BiochemistryTest) test;
         boolean isAssociated = bioTest.getHbA1cLevelInMoPeriod() > bioTest.getHbA1cLevelInPeacePeriod();
 

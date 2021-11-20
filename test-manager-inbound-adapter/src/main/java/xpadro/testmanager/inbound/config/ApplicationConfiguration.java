@@ -1,4 +1,4 @@
-package xpadro.testmanager.inbound;
+package xpadro.testmanager.inbound.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
