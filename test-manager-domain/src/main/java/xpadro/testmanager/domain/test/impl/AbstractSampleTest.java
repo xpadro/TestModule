@@ -9,6 +9,7 @@ public abstract class AbstractSampleTest implements SampleTest {
         this.name = name;
     }
 
+    @Override
     public String getName() {
         return name;
     }
