@@ -27,7 +27,7 @@ public class OperationService implements OperationPort {
 
     private List<OperationResult> performRequest(TestRequest testRequest) {
         return testRequest.getOperationTypes().stream()
-                .map(operation -> runOperation(testRequest, operation))
+                .map(operationType -> runOperation(testRequest, operationType))
                 .map(this::persistResult)
                 .collect(Collectors.toList());
     }
