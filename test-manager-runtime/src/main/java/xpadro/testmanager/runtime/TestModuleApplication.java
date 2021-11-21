@@ -1,4 +1,4 @@
-package xpadro.testmanager.inbound;
+package xpadro.testmanager.runtime;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

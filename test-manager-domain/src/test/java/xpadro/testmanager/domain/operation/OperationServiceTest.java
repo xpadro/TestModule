@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import xpadro.testmanager.domain.operation.analysis.AnalysisResult;
 import xpadro.testmanager.domain.order.Order;
 import xpadro.testmanager.domain.order.TestRequest;
+import xpadro.testmanager.domain.port.OperationResultPort;
 import xpadro.testmanager.domain.test.SampleTest;
 import xpadro.testmanager.domain.test.impl.ImmunologyTest;
 
@@ -18,6 +19,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -27,11 +29,14 @@ class OperationServiceTest {
     @Mock
     private Operation operation;
 
+    @Mock
+    private OperationResultPort operationResultPort;
+
     @BeforeEach
     public void setUp() {
         Map<OperationType, Operation> operations = new HashMap<>();
         operations.put(OperationType.ANALYSIS, operation);
-        this.operationService = new OperationService(operations);
+        this.operationService = new OperationService(operations, operationResultPort);
     }
 
     @Test
@@ -46,6 +51,7 @@ class OperationServiceTest {
 
         assertThat(results.size()).isEqualTo(1);
         assertThat(results.get(0).isProcessed()).isTrue();
+        verify(operationResultPort).persist(results.get(0));
     }
 
     @Test

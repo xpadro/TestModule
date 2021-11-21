@@ -3,6 +3,7 @@ package xpadro.testmanager.domain.operation;
 import xpadro.testmanager.domain.order.Order;
 import xpadro.testmanager.domain.order.TestRequest;
 import xpadro.testmanager.domain.port.OperationPort;
+import xpadro.testmanager.domain.port.OperationResultPort;
 
 import java.util.List;
 import java.util.Map;
@@ -10,9 +11,11 @@ import java.util.stream.Collectors;
 
 public class OperationService implements OperationPort {
     private final Map<OperationType, Operation> operations;
+    private final OperationResultPort operationResultPort;
 
-    public OperationService(Map<OperationType, Operation> operations) {
+    public OperationService(Map<OperationType, Operation> operations, OperationResultPort operationResultPort) {
         this.operations = operations;
+        this.operationResultPort = operationResultPort;
     }
 
     @Override
@@ -25,6 +28,7 @@ public class OperationService implements OperationPort {
     private List<OperationResult> performRequest(TestRequest testRequest) {
         return testRequest.getOperationTypes().stream()
                 .map(operation -> runOperation(testRequest, operation))
+                .map(this::persistResult)
                 .collect(Collectors.toList());
     }
 
@@ -36,5 +40,10 @@ public class OperationService implements OperationPort {
         }
 
         return operation.operate(testRequest.getTest());
+    }
+
+    private OperationResult persistResult(OperationResult result) {
+        operationResultPort.persist(result);
+        return result;
     }
 }

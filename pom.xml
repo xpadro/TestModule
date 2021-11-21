@@ -9,7 +9,8 @@
 		<module>test-manager-domain</module>
 		<module>test-manager-inbound-adapter</module>
 		<module>test-manager-outbound-adapter</module>
-	</modules>
+        <module>test-manager-runtime</module>
+    </modules>
 
 	<groupId>xpadro</groupId>
 	<artifactId>TestModule</artifactId>
