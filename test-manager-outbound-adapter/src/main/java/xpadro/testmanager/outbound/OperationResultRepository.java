@@ -1,12 +1,9 @@
 package xpadro.testmanager.outbound;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 import xpadro.testmanager.domain.operation.OperationResult;
-import xpadro.testmanager.domain.port.OperationResultPort;
 
-public class OperationResultRepository implements OperationResultPort {
-
-    @Override
-    public void persist(OperationResult result) {
-
-    }
+@Repository
+public interface OperationResultRepository extends MongoRepository<OperationResult, Long> {
 }
