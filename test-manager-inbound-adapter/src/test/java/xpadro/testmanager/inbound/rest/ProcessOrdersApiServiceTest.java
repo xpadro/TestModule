@@ -1,6 +1,5 @@
 package xpadro.testmanager.inbound.rest;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,11 +24,6 @@ class ProcessOrdersApiServiceTest {
 
     @Mock
     private OperationPort operationPort;
-
-    @BeforeEach
-    public void setUp() {
-        service = new ProcessOrdersApiService(operationPort);
-    }
 
     @Test
     public void domainIsInvokedWithRequestedOrder() {

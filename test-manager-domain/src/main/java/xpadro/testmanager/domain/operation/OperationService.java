@@ -21,11 +21,11 @@ public class OperationService implements OperationPort {
     @Override
     public List<OperationResult> processOrder(Order order) {
         return order.getTestRequests().stream()
-                .flatMap(request -> performRequest(request).stream())
+                .flatMap(request -> processTestRequest(request).stream())
                 .collect(Collectors.toList());
     }
 
-    private List<OperationResult> performRequest(TestRequest testRequest) {
+    private List<OperationResult> processTestRequest(TestRequest testRequest) {
         return testRequest.getOperationTypes().stream()
                 .map(operationType -> runOperation(testRequest, operationType))
                 .map(this::persistResult)
